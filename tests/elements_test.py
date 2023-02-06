@@ -39,10 +39,18 @@ class TestElements:
         def test_radio_button(self, driver):
             radio_button_page = RadioButtonPage(driver, "https://demoqa.com/radio-button")
             radio_button_page.open()
-            input_radio_button = radio_button_page.click_random_RB()
-            output_radio_button = radio_button_page.get_RB_result()
-            time.sleep(3)
-            assert input_radio_button == output_radio_button
+            #input_radio_button = radio_button_page.click_random_RB()
+            radio_button_page.click_radio_button('yes')
+            output_RB_yes = radio_button_page.get_RB_result()
+            radio_button_page.click_radio_button('impressive')
+            output_RB_impressive = radio_button_page.get_RB_result()
+            radio_button_page.click_radio_button('no')
+            output_RB_no = radio_button_page.get_RB_result()
+
+            assert output_RB_yes == "Yes", "'Yes' haven't been selected"
+            assert output_RB_impressive == "Impressive", "'Impressive' haven't been selected"
+            assert output_RB_no == "No", "'No' haven't been selected"
+
 
 
 

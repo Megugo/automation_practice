@@ -7,7 +7,6 @@ from pages.base_page import BasePage
 
 
 class TextBoxPage(BasePage):
-
     locators = TextBoxPageLocators()
 
     def fill_all_fields(self):
@@ -33,8 +32,8 @@ class TextBoxPage(BasePage):
 
         return full_name, email, current_address, permanent_address
 
-class CheckBoxPage(BasePage):
 
+class CheckBoxPage(BasePage):
     locators = CheckBoxPageLocators()
 
     def open_full_list(self):
@@ -48,7 +47,7 @@ class CheckBoxPage(BasePage):
             if count > 0:
                 self.go_to_element(item)
                 item.click()
-                count-=1
+                count -= 1
             else:
                 break
 
@@ -59,7 +58,7 @@ class CheckBoxPage(BasePage):
             item_title = box.find_element("xpath", self.locators.ITEM_TITLE)
             data.append(item_title.text)
 
-        return str(data).replace(' ','').replace('doc','').replace('.','').lower()
+        return str(data).replace(' ', '').replace('doc', '').replace('.', '').lower()
 
     def get_output_result(self):
         result_list = self.elements_are_present(self.locators.OUTPUT_RESULT)
@@ -67,25 +66,29 @@ class CheckBoxPage(BasePage):
         for item in result_list:
             data.append(item.text)
 
-        return str(data).replace(' ','').lower()
+        return str(data).replace(' ', '').lower()
+
 
 class RadioButtonPage(BasePage):
-
     locators = RadioButtonPageLocators()
+
     def click_random_RB(self):
         item_list = self.elements_are_visible(self.locators.ALL_ACTIVE_RADIO_BUTTONS)
         count = 3
         while count != 0:
-            item = item_list[random.randint(0,1)]
+            item = item_list[random.randint(0, 1)]
             item.click()
             item_text = item.text
-            count-=1
+            count -= 1
         return item_text
 
+    def click_radio_button(self, choice):
+        choices = {'yes': self.locators.YES,
+                   'impressive': self.locators.IMPRESSIVE,
+                   'no': self.locators.NO}
+        self.element_is_visible(choices[choice]).click()
 
     def get_RB_result(self):
         result = self.element_is_present(self.locators.RESULT)
 
         return result.text
-
-
