@@ -19,10 +19,14 @@ class TextBoxPageLocators:
 
 class CheckBoxPageLocators:
 
-     EXPEND_ALL = (By.CSS_SELECTOR, "button[title='Expand all']")
-     ITEM_LIST = (By.CSS_SELECTOR, 'span[class="rct-title"]')
-     CHECKED_ITEMS = (By.CSS_SELECTOR, 'svg[class="rct-icon rct-icon-check"]')
-     ITEM_TITLE = (".//ancestor::span[@class='rct-text']")
-     OUTPUT_RESULT = (By.CSS_SELECTOR, "span[class='text-success']")
+    EXPEND_ALL = (By.CSS_SELECTOR, "button[title='Expand all']")
+    ITEM_LIST = (By.CSS_SELECTOR, 'span[class="rct-title"]')
+    CHECKED_ITEMS = (By.CSS_SELECTOR, 'svg[class="rct-icon rct-icon-check"]')
+    ITEM_TITLE = (".//ancestor::span[@class='rct-text']")
+    OUTPUT_RESULT = (By.CSS_SELECTOR, "span[class='text-success']")
+
+class RadioButtonPageLocators:
+    ALL_ACTIVE_RADIO_BUTTONS = (By.CSS_SELECTOR, "div[class='custom-control custom-radio custom-control-inline']")
+    RESULT = (By.CSS_SELECTOR, "span[class='text-success']")
 
 

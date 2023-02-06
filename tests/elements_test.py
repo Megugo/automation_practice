@@ -1,6 +1,6 @@
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
 
 
 class TestElements:
@@ -33,6 +33,16 @@ class TestElements:
             output_result = check_box_page.get_output_result()
 
             assert input_checkboxes == output_result, "Input checkboxes not mathced with results"
+
+    class TestRadioButton:
+
+        def test_radio_button(self, driver):
+            radio_button_page = RadioButtonPage(driver, "https://demoqa.com/radio-button")
+            radio_button_page.open()
+            input_radio_button = radio_button_page.click_random_RB()
+            output_radio_button = radio_button_page.get_RB_result()
+            time.sleep(3)
+            assert input_radio_button == output_radio_button
 
 
 
