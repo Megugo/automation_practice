@@ -1,6 +1,8 @@
 import random
 import time
 
+from selenium.webdriver.common.by import By
+
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
     WebTablePageLocators
@@ -135,4 +137,38 @@ class WebTablePage(BasePage):
         delete_button = self.element_is_present(self.locators.DELETE_BUTTON)
         row = delete_button.find_element('xpath', self.locators.ROW_PARENT)
         return row.text.splitlines()
+
+    def update_person_info(self):
+        person_info = next(generated_person())
+        age = person_info.age
+        self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+        self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
+        self.element_is_visible(self.locators.SUBMIT).click()
+        return age
+
+    def delete_person(self):
+        self.element_is_visible(self.locators.DELETE_BUTTON).click()
+
+    def check_delete(self):
+        return self.element_is_present(self.locators.NP_ROWS).text
+
+    def change_rows(self):
+        count = [5, 10, 20, 25, 50, 100]
+        data = []
+
+        for i in count:
+            count_rows_button = self.element_is_visible(self.locators.COUNT_ROWS)
+            self.go_to_element(count_rows_button)
+            count_rows_button.click()
+            self.element_is_visible((By.CSS_SELECTOR, f'option[value="{i}"]')).click
+            data.append(self.check_count_rows())
+        return data
+
+    def check_count_rows(self):
+        list_rows = self.elements_are_present(self.locators.FULL_PERSONS_LIST)
+        return len(list_rows)
+
+
+
+
 
